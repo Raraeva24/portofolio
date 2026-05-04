@@ -1575,33 +1575,43 @@
             });
         })();
 
+
+        function getProficiencyLabel(pct) {
+    if (pct >= 90) return 'Pakar';
+    if (pct >= 80) return 'Mahir';
+    if (pct >= 65) return 'Menengah';
+    if (pct >= 50) return 'Paham Dasar';
+    return 'Pemula';
+}
         // ── 2. SKILL BARS ──
         const skillData = [
-            { name: 'Laravel / PHP', pct: 88, color: '#dfeca5' },
-            { name: 'RESTful API Design', pct: 85, color: '#c5e87a' },
-            { name: 'MySQL & Database', pct: 85, color: '#a8d94e' },
-            { name: 'Git & GitHub', pct: 82, color: '#7ec44a' },
-            { name: 'Figma / UI Design', pct: 82, color: '#55ae46' },
-            { name: 'Golang', pct: 82, color: '#2e9642' },
+            { name: 'Laravel / PHP', pct: 65, color: '#dfeca5' },
+            { name: 'RESTful API Design', pct: 65, color: '#c5e87a' },
+            { name: 'MySQL & Database', pct: 65, color: '#a8d94e' },
+            { name: 'Git & GitHub', pct: 65, color: '#7ec44a' },
+            { name: 'Figma / UI Design', pct: 65, color: '#55ae46' },
+            { name: 'Golang', pct: 50, color: '#2e9642' },
         ];
 
+        
+
         const TOTAL_SEGMENTS = 10;
-        const cont = document.getElementById('skillBars');
-        skillData.forEach(s => {
-            const filled = Math.round(s.pct / 10);
-            let segs = '';
-            for (let i = 0; i < TOTAL_SEGMENTS; i++) {
-                segs += i < filled
-                    ? `<div class="seg" style="background:${s.color};"></div>`
-                    : `<div class="seg empty"></div>`;
-            }
-            cont.innerHTML += `
-                <div class="skill-row">
-                    <span class="skill-name">${s.name}</span>
-                    <div class="segments">${segs}</div>
-                    <span class="skill-pct">${s.pct}%</span>
-                </div>`;
-        });
+const cont = document.getElementById('skillBars');
+skillData.forEach(s => {
+    const filled = Math.round(s.pct / 10);
+    let segs = '';
+    for (let i = 0; i < TOTAL_SEGMENTS; i++) {
+        segs += i < filled
+            ? `<div class="seg" style="background:${s.color};"></div>`
+            : `<div class="seg empty"></div>`;
+    }
+    cont.innerHTML += `
+        <div class="skill-row">
+            <span class="skill-name">${s.name}</span>
+            <div class="segments">${segs}</div>
+            <span class="skill-pct">${getProficiencyLabel(s.pct)}</span>  <!-- ← ganti di sini -->
+        </div>`;
+});
 
         // ── 3. PROJECT DATA ──
         const projects = [
